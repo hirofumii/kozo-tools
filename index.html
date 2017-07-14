@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>小僧Tools</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="//yui.yahooapis.com/pure/0.5.0/pure-min.css">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <div id="loader">
+        <div class="csspinner traditional"></div>
+    </div>
+    <div id="fade"></div>
+    <div id="wrapper">
+        <div id="layout" class="pure-g">
+            <header class="pure-u-1">
+                <h1>Kozo Tools<span>(仮)</span></h1>
+            </header>
+            <div class="contents pure-u-1">
+                <h2>QR KOZO</h2>
+                <form class="pure-form">
+                    <fieldset>
+                        <legend>QRコードを生成します。</legend><input id="url" type="url" placeholder="url" autofocus> <button id="button"
+                            type="button" class="pure-button pure-button-primary">Send</button></fieldset>
+                </form>
+                <p id="qrcode"></p>
+                <h2>Dokodemo QR KOZO</h2>
+                <p>ブックマークバーからどこでもQR小僧が使用できます。</p>
+                <p><a href="javascript:(function(){var w=window,d=document,g='https://chart.googleapis.com/chart?chs=300x300&cht=qr&choe=UTF-8&chl=',t=d.all?d.selection.createRange().text:w.getSelection().toString(),f,q,qd,x,y;if(!t.length)t=location.href;f=g+encodeURIComponent(t);if(q=w.open('','','width=320,height=400,personalbar=0,toolbar=0,scrollbars=1')){qd=q.document;qd.write('&lt;img id=&quot;i&quot;&gt;QR小僧:&lt;br&gt;&lt;textarea id=&quot;t&quot; style=&quot;width:100%;&quot;&gt;'+t+'&lt;/textarea&gt;');(function(){try{y=qd.getElementById(&quot;t&quot;).value;if(x!=y){x=y;qd.getElementById(&quot;i&quot;).src=g+encodeURIComponent(y)}setTimeout(arguments.callee,300)}catch(e){}})()}})();">QR小僧</a></p>
+                <p><a href="#" class="dialogBtn" data-imgurl="/img/img_tutorial_01.gif">取説</a></p>
+                <h2>Cookie KOZO</h2>
+                <p>ブックマークバーから閲覧サイトのクッキーを一括削除できます。</p>
+                <p><a href="javascript:(function(){var d=document,c=d.cookie.split(';'),l=location,p=l.pathname+l.search,i,j;if(!c[0])c=[];for(i in c)for(j=1;j&lt;=p.length;j++)d.cookie=c[i]+';expires=Thu, 01-Jan-1970 00:00:00;path='+p.substr(0,j);alert(c.length+'個削除したでござる！')})();">クッキー小僧</a></p>
+                <p><a href="#" class="dialogBtn" data-imgurl="/img/img_tutorial_02.gif">取説</a></p>
+            </div>
+            <footer class="pure-u-1"><small class="copyright">©2014-2017 Kozo Tools / Playr.</small></footer>
+        </div>
+    </div>
+    <div id="dialog">
+        <p><a href="#" class="dialog_close">Close</a></p>
+        <div class="dialog_container"></div>
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html>
