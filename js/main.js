@@ -1,1 +1,97 @@
-(function(c,a,d){WebFontConfig={google:{families:["Lato:300:latin"]}};(function(){var e=document.createElement("script");e.src=("https:"==document.location.protocol?"https":"http")+"://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js";e.type="text/javascript";e.async="true";var f=document.getElementsByTagName("script")[0];f.parentNode.insertBefore(e,f)})();c("head").append('<style type="text/css">#wrapper { display: none; } #fade, #loader { display: block; }</style>');c.event.add(window,"load",function(){var e=c("#wrapper").height();c("#fade").css("height",e).delay(400).fadeOut(600);c("#loader").delay(300).fadeOut(400);c("#wrapper").css("display","block")});function b(){var g="http://chart.apis.google.com/chart?chs=250x250&cht=qr&chld=l|0&chl=";var f=escape(c.trim(c("#url").val()));c("#qr-image").remove();if(f.length){var e=g+f;c("#qrcode").append('<img src="'+e+'" alt="generating..." id="qr-image" class="qr-image" />')}return false}c(function(){c("#button").on("click",function(){b()});c("#url").keypress(function(f){if(f.which==13){b();return false}});c("#url").keypress(function(){b()})});c(function(){c(".dialogBtn").on("click",function(){var h=c(this).data("imgurl"),g=new Image(),i,k,j=c("#dialog");var f=j.find(".dialog_container");f.append('<img src="" id="dialog_img">');g.onload=function(){f.children("img").attr({src:h,height:k,width:i})};g.src=h;i=g.width;k=g.height;c("body").append('<div id="mask"></div>');c("#mask").show();j.css({top:c(window).height()/2-k/2,left:c(window).width()/2-i/2}).show();e();return false});function e(){var h=c("#dialog"),i=c("#mask"),g=c(".dialogBtn"),f=c("#dialog_img");h.on("click",".dialog_close",function(j){j.preventDefault();i.remove();h.fadeOut();f.remove()});i.on("click",function(j){j.preventDefault();i.remove();h.fadeOut();f.remove()})}})})(jQuery,this);
+(function($, window, document) {
+
+    'use strict';
+
+    $('head').append('<style type="text/css">#wrapper { display: none; } #fade, #loader { display: block; }</style>');
+    $.event.add(window, 'load', function() {
+        var height = $('#wrapper').height();
+
+        $('#fade').css('height', height).delay(400).fadeOut(600);
+        $('#loader').delay(300).fadeOut(400);
+        $('#wrapper').css('display', 'block')
+    });
+
+    function generateQRCode() {
+        var base_url = 'http://chart.apis.google.com/chart?chs=250x250&cht=qr&chld=l|0&chl=';
+        var text = escape($.trim($('#url').val()));
+
+        $('#qr-image').remove();
+
+        if (text.length) {
+            var url = base_url + text;
+
+            $('#qrcode').append('<img src="' + url + '" alt="generating..." id="qr-image" class="qr-image" />')
+        }
+        return false;
+    }
+
+    $(function() {
+        $('#button').on('click', function() {
+            generateQRCode();
+        });
+        $('#url').keypress(function(e) {
+            if (e.which == 13) {
+                generateQRCode();
+                return false;
+            }
+        });
+        $('#url').keypress(function() {
+            generateQRCode();
+        });
+    });
+
+    $(function() {
+        $('.dialogBtn').on('click', function() {
+            var data = $(this).data('imgurl'),
+                img = new Image(),
+                width,
+                height,
+                $dialog = $('#dialog');
+
+            var $container = $dialog.find('.dialog_container');
+
+            $container.append('<img src="" id="dialog_img">');
+            img.onload = function() {
+                $container.children('img').attr({
+                    src: data,
+                    height: height,
+                    width: width
+                })
+            };
+            img.src = data;
+            width = img.width;
+            height = img.height;
+
+            $('body').append('<div id="mask"></div>');
+            $('#mask').show();
+            $dialog.css({
+                top: $(window).height() / 2 - height / 2,
+                left: $(window).width() / 2 - width / 2
+            }).show();
+            showDialog();
+            return false;
+        });
+
+        function showDialog() {
+            var $dialog = $('#dialog'),
+                $mask = $('#mask'),
+                $button = $('.dialogBtn'),
+                $img = $('#dialog_img');
+
+            $dialog.on('click', '.dialog_close', function(e) {
+                e.preventDefault();
+
+                $mask.remove();
+                $dialog.fadeOut();
+                $img.remove()
+            });
+            $mask.on('click', function(e) {
+                e.preventDefault();
+
+                $mask.remove();
+                $dialog.fadeOut();
+                $img.remove()
+            });
+        }
+    });
+})(jQuery, window, document);
